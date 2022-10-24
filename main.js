@@ -95,6 +95,7 @@ posts.forEach(function(value,index){
         </div>
     </div> 
 </div>`;
+
 container.append(post)
 //console.log(value,index)
 
@@ -119,13 +120,16 @@ let likesBtn = Array.from(likeBtns);
 
 for(let i = 0; i < likesBtn.length; i++){
    // console.log(likesBtn[i])
+   
     likesBtn[i].addEventListener('click', function(){
     if(!arrayLike.includes(likesBtn[i])){
           arrayLike.push(likesBtn[i])
          likesBtn[i].classList.add('like-button--liked')
-         let likeCounterHTML = document.querySelector('.js-likes-counter');
-        console.log(likeCounterHTML)
-         
+         let likeCounterHTML = document.querySelectorAll('.js-likes-counter');
+        console.log(parseInt(likeCounterHTML[i].innerHTML))
+
+         likeCounterHTML[i].innerHTML = parseInt(likeCounterHTML[i].innerHTML) + 1;
+         console.log(arrayLike)
 
         
 
@@ -133,6 +137,10 @@ for(let i = 0; i < likesBtn.length; i++){
     }else{
         console.log('Già incluso')
         likesBtn[i].classList.toggle('like-button--liked')
+        likeCounterHTML[i].innerHTML = parseInt(likeCounterHTML[i].innerHTML) - 1;
+        arrayLike.shift()
+        console.log(arrayLike)
+
 
 
     }

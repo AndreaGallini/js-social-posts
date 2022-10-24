@@ -61,8 +61,9 @@ const arrayNomi = posts.map((val)=> {
 });
 
 let arrayLike =[];
-posts.forEach(function(value){
-
+posts.forEach(function(value,index){
+    let date =value.created;
+    date = date.split("-").reverse().join("-");
     let post = document.createElement('div');
     post.className = 'post';
     post.innerHTML = `
@@ -73,7 +74,7 @@ posts.forEach(function(value){
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${value.author.name}</div>
-            <div class="post-meta__time">4 mesi fa</div>
+            <div class="post-meta__time">${date}</div>
         </div>                    
     </div>
 </div>
@@ -90,37 +91,53 @@ posts.forEach(function(value){
             </a>
         </div>
         <div class="likes__counter">
-            Piace a <b id="like-counter-1" class="js-likes-counter">${value.likes}</b> persone
+            Piace a <b id="like-counter-${value.id}"   class="js-likes-counter ">${value.likes}</b> persone
         </div>
     </div> 
 </div>`;
 container.append(post)
+//console.log(value,index)
+
 })
 let likeCounterHTML = document.querySelectorAll('.js-likes-counter');
+//console.log(likeCounterHTML)
 
-let likeC = Array.from(likeCounterHTML)
-for(let x = 0 ; x < likeC.length; x++){
-    let Plike = parseInt(likeC[x].innerHTML);
-    console.log(Plike)
+let likeCounterArray = Array.from(likeCounterHTML)
+//console.log(likeCounterArray)
+for(let x = 0 ; x < likeCounterArray.length; x++){
+    let pLike = parseInt(likeCounterArray[x].innerHTML);
+  //  console.log(pLike)
 }
 
-console.log(likeC)
+
+
 let check = false
 let likeBtns = document.querySelectorAll('a');
 let likesBtn = Array.from(likeBtns);
-console.log(likesBtn)
+
+//console.log(likesBtn)
+
 for(let i = 0; i < likesBtn.length; i++){
+   // console.log(likesBtn[i])
     likesBtn[i].addEventListener('click', function(){
-        likesBtn[i].classList.add('like-button--liked')
-        if(!arrayLike.includes(likesBtn[i])){
-            arrayLike.push(likesBtn[i])
+    if(!arrayLike.includes(likesBtn[i])){
+          arrayLike.push(likesBtn[i])
+         likesBtn[i].classList.add('like-button--liked')
+         let likeCounterHTML = document.querySelector('.js-likes-counter');
+        console.log(likeCounterHTML)
+         
 
         
 
 
-        }else{
-            console.log('Già incluso')
-        }
-        console.log(arrayLike)
-    })
+    }else{
+        console.log('Già incluso')
+        likesBtn[i].classList.toggle('like-button--liked')
+
+
+    }
+ } )
 }
+
+
+

@@ -60,7 +60,7 @@ const arrayNomi = posts.map((val)=> {
     return val.author
 });
 
-
+let arrayLike =[];
 posts.forEach(function(value){
 
     let post = document.createElement('div');
@@ -69,7 +69,7 @@ posts.forEach(function(value){
     <div class="post__header">
     <div class="post-meta">                    
         <div class="post-meta__icon">
-            <img class="profile-pic" src="${value.author.image}" alt="">${value.author.name}">                    
+            <img class="profile-pic" src="${value.author.image}" alt="${value.author.name}">              
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${value.author.name}</div>
@@ -84,7 +84,7 @@ posts.forEach(function(value){
 <div class="post__footer">
     <div class="likes js-likes">
         <div class="likes__cta">
-            <a class="like-button  js-like-button" href="#" data-postid="1">
+            <a  class="like-button  js-like-button"  data-postid="1">
                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                 <span class="like-button__label">Mi Piace</span>
             </a>
@@ -96,4 +96,31 @@ posts.forEach(function(value){
 </div>`;
 container.append(post)
 })
+let likeCounterHTML = document.querySelectorAll('.js-likes-counter');
 
+let likeC = Array.from(likeCounterHTML)
+for(let x = 0 ; x < likeC.length; x++){
+    let Plike = parseInt(likeC[x].innerHTML);
+    console.log(Plike)
+}
+
+console.log(likeC)
+let check = false
+let likeBtns = document.querySelectorAll('a');
+let likesBtn = Array.from(likeBtns);
+console.log(likesBtn)
+for(let i = 0; i < likesBtn.length; i++){
+    likesBtn[i].addEventListener('click', function(){
+        likesBtn[i].classList.add('like-button--liked')
+        if(!arrayLike.includes(likesBtn[i])){
+            arrayLike.push(likesBtn[i])
+
+        
+
+
+        }else{
+            console.log('Già incluso')
+        }
+        console.log(arrayLike)
+    })
+}
